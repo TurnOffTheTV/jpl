@@ -13,52 +13,12 @@
 			"description": "List of elements in the document.",
 			"type": "array",
 			"items": {
-				"properties": {
-					"style": {"type": "string"}
-				},
-				"oneOf": [
-					{
-						"properties": {
-							"type": {"const": "paragraph"},
-
-							"content": {"type": "string"}
-						},
-						"required": ["content"]
-					},
-					{
-						"properties": {
-							"type": {"const": "header"},
-
-							"content": {"type": "string"},
-							"level": {
-								"type": "number",
-								"minimum": 1,
-								"maximum": 6
-							}
-						},
-						"required": ["content","level"]
-					},
-					{
-						"properties": {
-							"type": {"const": "list"},
-
-							"list": {"enum": ["ordered","unordered"]},
-							"items": {
-								"type": "array",
-								"items": {
-									"properties": {
-										"content": {"type": "string"},
-										"style": {"type": "string"}
-									},
-									"required": ["content"]
-								}
-							}
-						},
-						"required": ["list","items"]
-					}
-				],
-				"required": ["type"]
+				"$ref": "jpl-el.json"
 			}
+		},
+		"style": {
+			"type": "string",
+			"description": "URI to a stylesheet to use in this document"
 		}
 	},
 	"required": ["title", "elements"]

@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft-07/schema",
+	"$id": "https://turnoffthetv.xyz/jpl-el.json",
+	"title": "JPL Element",
+	"description": "An element for a JSON Page Layout document",
+	"type": "object",
+	"properties": {
+		"class": {
+			"type": ["string","array"],
+			"description": "Class name(s) for this element",
+			"items": {"type": "string"}
+		},
+		"style": {"type": "string", "description": "CSS styling for this element"},
+		"type": {"description": "Type of element"}
+	},
+	"oneOf": [
+		{
+			"properties": {
+				"type": {"const": "paragraph"},
+
+				"content": {"type": "string", "description": "Text for this paragraph"}
+			},
+			"required": ["content"]
+		},
+		{
+			"properties": {
+				"type": {"const": "link"},
+
+				"content": {"type": "string", "description": "Text for this link"},
+				"href": {"type": "string", "description": "URL this link points to"}
+			},
+			"required": ["href"]
+		},
+		{
+			"properties": {
+				"type": {"const": "header"},
+
+				"content": {"type": "string", "description": "Text for this header"},
+				"level": {
+					"type": "number",
+					"minimum": 1,
+					"maximum": 6,
+					"description": "Subheader type"
+				}
+			},
+			"required": ["content","level"]
+		},
+		{
+			"properties": {
+				"type": {"const": "list"},
+
+				"list": {"enum": ["ordered","unordered"], "description": "Whether to display the list with numbers"},
+				"items": {
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{
+								"properties": {
+									"content": {"type": "string", "description": "Text for this list item"},
+									"style": {"type": "string", "description": "CSS styling for this element"},
+									"type": {"type": "null"}
+								},
+								"required": ["content"]
+							},
+							{
+								"$ref": "jpl-el.json"
+							}
+						]
+					},
+					"description": "Items in the list"
+				}
+			},
+			"required": ["list","items"]
+		}
+	],
+	"required": ["type"]
+}

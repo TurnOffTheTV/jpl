@@ -1,6 +1,7 @@
 {
-	"$schema": "./jpl.json",
+	"$schema": "jpl.json",
 	"title": "Example page",
+	"style": "./style.css",
 	"elements": [
 		{
 			"type": "header",
@@ -23,8 +24,39 @@
 				},
 				{
 					"content": "Lists (like this one)"
+				},
+				{
+					"type": "link",
+					"href": "https://turnoffthetv.xyz",
+					"content": "Lists can have elements, too!"
 				}
 			]
+		},
+		{
+			"type": "link",
+			"href": "https://turnoffthetv.xyz",
+			"content": "There are links, too!"
+		},
+		{
+			"type": "paragraph",
+			"content": "This is styled inline",
+			"style": "color: lightgreen;"
+		},
+		{
+			"type": "paragraph",
+			"content": "This is styled using a class",
+			"class": "red"
+		},
+		{
+			"type": "paragraph",
+			"content": "This is also styled using a class. Two of them!",
+			"class": ["red", "black"]
+		},
+		{
+			"type": "paragraph",
+			"content": "This is styled both inline and with a class",
+			"style": "color: lightgreen;",
+			"class": "black"
 		}
 	]
 }

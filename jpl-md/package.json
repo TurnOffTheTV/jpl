@@ -1,6 +1,6 @@
 {
   "name": "jpl-md",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Convert between JPL and Markdown",
   "main": "index.mjs",
   "scripts": {

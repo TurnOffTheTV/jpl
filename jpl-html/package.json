@@ -1,6 +1,6 @@
 {
   "name": "jpl-html",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Convert between JPL and HTML",
   "main": "index.mjs",
   "scripts": {
