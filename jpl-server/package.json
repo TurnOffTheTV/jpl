@@ -1,0 +1,25 @@
+{
+  "name": "jpl-server",
+  "version": "1.0.0",
+  "description": "Example server for JPL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TurnOffTheTV/jpl.git"
+  },
+  "keywords": [
+    "JPL"
+  ],
+  "author": "TurnOffTheTV",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TurnOffTheTV/jpl/issues"
+  },
+  "homepage": "https://github.com/TurnOffTheTV/jpl#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

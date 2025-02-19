@@ -1,0 +1,12 @@
+{
+	"$schema": "../../jpl.json",
+	"title": "Example server",
+	"style": "/style.css",
+	"elements": [
+		{
+			"type": "header",
+			"level": 1,
+			"content": "404"
+		}
+	]
+}
