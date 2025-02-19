@@ -17,24 +17,42 @@ function htmEl(e){
 	}
 	switch(e.type){
 		case "paragraph":
-			html+=`<p${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`+e.content+"</p>"
+			html+=`<p${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`
+			if(typeof e.content==="string") e.content=[e.content];
+			for(let i=0;i<e.content.length;i++){
+				if(typeof e.content[i]==="string"){
+					html+=e.content[i];
+				}else{
+					html+=htmEl(e.content[i]);
+				}
+			}
+			html+="</p>";
 		break;
 		case "link":
 			html+=`<a${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""} href="${e.href}">`+(e.content?e.content:e.href)+"</a>"
 		break;
 		case "header":
-			html+=`<h${e.level}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`+e.content+`</h${e.level}>`
+			html+=`<h${e.level}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
+			if(typeof e.content==="string") e.content=[e.content];
+			for(let i=0;i<e.content.length;i++){
+				if(typeof e.content[i]==="string"){
+					html+=e.content[i];
+				}else{
+					html+=htmEl(e.content[i]);
+				}
+			}
+			html+=`</h${e.level}>`;
 		break;
 		case "list":
 			html+=`<${e.list[0]}l${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
 
-			for(let j=0;j<e.items.length;j++){
-				if(e.items[j].type){
+			for(let i=0;i<e.items.length;i++){
+				if(e.items[i].type){
 					html+="<li>";
-					html+=htmEl(e.items[j]);
+					html+=htmEl(e.items[i]);
 					html+="</li>";
 				}else{
-					html+=`<li${e.items[j].style?" style=\""+e.items[j].style+"\"":""}>${e.items[j].content}</li>`;
+					html+=`<li${e.items[i].style?" style=\""+e.items[i].style+"\"":""}>${e.items[i].content}</li>`;
 				}
 			}
 

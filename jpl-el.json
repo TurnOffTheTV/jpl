@@ -18,7 +18,15 @@
 			"properties": {
 				"type": {"const": "paragraph"},
 
-				"content": {"type": "string", "description": "Text for this paragraph"}
+				"content": {
+					"type": ["string","array"],
+					"description": "Text for this paragraph"},
+					"items": {
+						"oneOf": [
+							{"type": "string"},
+							{"$ref": "jpl-el.json"}
+						]
+					}
 			},
 			"required": ["content"]
 		},

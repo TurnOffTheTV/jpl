@@ -14,13 +14,20 @@ function mdEl(e){
 	let md = "";
 	switch(e.type){
 		case "paragraph":
-			md+=e.content+"\n";
+			if(typeof e.content==="string") e.content=[e.content];
+			for(let i=0;i<e.content.length;i++){
+				if(typeof e.content[i]==="string"){
+					md+=e.content[i];
+				}else{
+					md+=mdEl(e.content[i])
+				}
+			}
 		break;
 		case "link":
 			if(e.content){
-				md+=`[${e.content}](${e.href})\n`;
+				md+=`[${e.content}](${e.href})`;
 			}else{
-				md+=`<${e.href}>\n`;
+				md+=`<${e.href}>`;
 			}
 		break;
 		case "header":
@@ -28,15 +35,25 @@ function mdEl(e){
 				md+="#";
 			}
 
-			md+=` ${e.content}\n`;
+			md+=" ";
+
+			if(typeof e.content==="string") e.content=[e.content];
+			for(let i=0;i<e.content.length;i++){
+				if(typeof e.content[i]==="string"){
+					md+=e.content[i];
+				}else{
+					md+=mdEl(e.content[i])
+				}
+			}
 		break;
 		case "list":
-			for(let j=0;j<e.items.length;j++){
-				if(e.items[j].type){
+			for(let i=0;i<e.items.length;i++){
+				if(i!==0) md+="\n";
+				if(e.items[i].type){
 					md+="* ";
-					md+=mdEl(e.items[j]);
+					md+=mdEl(e.items[i]);
 				}else{
-					md+=`* ${e.items[j].content}\n`;
+					md+=`* ${e.items[i].content}`;
 				}
 			}
 		break;
@@ -55,6 +72,7 @@ export function jplToMd(jpl){
 
 	for(let i=0;i<jplObject.elements.length;i++){
 		md+=mdEl(jplObject.elements[i]);
+		md+="\n";
 		if(i!==jplObject.elements.length-1) md+="\n";
 	}
 
