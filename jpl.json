@@ -1,0 +1,65 @@
+{
+	"$schema": "https://json-schema.org/draft-07/schema",
+	"$id": "https://turnoffthetv.xyz/jpl.json",
+	"title": "JPL Document",
+	"description": "A JSON Page Layout document",
+	"type": "object",
+	"properties": {
+		"title": {
+			"description": "The title of the document, shown on its tab in the web browser.",
+			"type": "string"
+		},
+		"elements": {
+			"description": "List of elements in the document.",
+			"type": "array",
+			"items": {
+				"properties": {
+					"style": {"type": "string"}
+				},
+				"oneOf": [
+					{
+						"properties": {
+							"type": {"const": "paragraph"},
+
+							"content": {"type": "string"}
+						},
+						"required": ["content"]
+					},
+					{
+						"properties": {
+							"type": {"const": "header"},
+
+							"content": {"type": "string"},
+							"level": {
+								"type": "number",
+								"minimum": 1,
+								"maximum": 6
+							}
+						},
+						"required": ["content","level"]
+					},
+					{
+						"properties": {
+							"type": {"const": "list"},
+
+							"list": {"enum": ["ordered","unordered"]},
+							"items": {
+								"type": "array",
+								"items": {
+									"properties": {
+										"content": {"type": "string"},
+										"style": {"type": "string"}
+									},
+									"required": ["content"]
+								}
+							}
+						},
+						"required": ["list","items"]
+					}
+				],
+				"required": ["type"]
+			}
+		}
+	},
+	"required": ["title", "elements"]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "jpl-md",
+  "version": "1.0.0",
+  "description": "Convert between JPL and Markdown",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node test/test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TurnOffTheTV/jpl.git"
+  },
+  "keywords": [
+    "JPL",
+    "Markdown"
+  ],
+  "author": "TurnOffTheTV",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TurnOffTheTV/jpl/issues"
+  },
+  "homepage": "https://github.com/TurnOffTheTV/jpl#readme"
+}

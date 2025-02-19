@@ -1,0 +1,30 @@
+{
+	"$schema": "./jpl.json",
+	"title": "Example page",
+	"elements": [
+		{
+			"type": "header",
+			"level": 1,
+			"content": "Example page"
+		},
+		{
+			"type": "paragraph",
+			"content": "This is a page to demo JPL.\nHere are some things it can do:"
+		},
+		{
+			"type": "list",
+			"list": "unordered",
+			"items": [
+				{
+					"content": "Headers"
+				},
+				{
+					"content": "Paragraphs"
+				},
+				{
+					"content": "Lists (like this one)"
+				}
+			]
+		}
+	]
+}
