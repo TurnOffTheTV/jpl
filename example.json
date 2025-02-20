@@ -1,7 +1,8 @@
 {
-	"$schema": "jpl.json",
+	"$schema": "https://turnoffthetv.xyz/jpl.json",
 	"title": "Example page",
-	"style": "./style.css",
+	"styles": ["./style.css"],
+	"scripts": ["./script.js"],
 	"elements": [
 		{
 			"type": "header",
@@ -57,6 +58,11 @@
 			"content": "This is styled both inline and with a class",
 			"style": "color: lightgreen;",
 			"class": "black"
+		},
+		{
+			"type": "paragraph",
+			"content": "This is to be edited by a script",
+			"id": "editMe"
 		}
 	]
 }

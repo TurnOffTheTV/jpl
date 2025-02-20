@@ -1,5 +1,5 @@
 {
-	"$schema": "jpl.json",
+	"$schema": "https://turnoffthetv.xyz/jpl.json",
 	"title": "README",
 	"elements": [
 		{

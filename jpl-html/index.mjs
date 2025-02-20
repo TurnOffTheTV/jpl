@@ -17,7 +17,7 @@ function htmEl(e){
 	}
 	switch(e.type){
 		case "paragraph":
-			html+=`<p${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`
+			html+=`<p${e.id?" id=\""+e.id+"\"":""}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`
 			if(typeof e.content==="string") e.content=[e.content];
 			for(let i=0;i<e.content.length;i++){
 				if(typeof e.content[i]==="string"){
@@ -29,10 +29,10 @@ function htmEl(e){
 			html+="</p>";
 		break;
 		case "link":
-			html+=`<a${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""} href="${e.href}">`+(e.content?e.content:e.href)+"</a>"
+			html+=`<a${e.id?" id=\""+e.id+"\"":""}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""} href="${e.href}">`+(e.content?e.content:e.href)+"</a>"
 		break;
 		case "header":
-			html+=`<h${e.level}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
+			html+=`<h${e.level}${e.id?" id=\""+e.id+"\"":""}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
 			if(typeof e.content==="string") e.content=[e.content];
 			for(let i=0;i<e.content.length;i++){
 				if(typeof e.content[i]==="string"){
@@ -44,7 +44,7 @@ function htmEl(e){
 			html+=`</h${e.level}>`;
 		break;
 		case "list":
-			html+=`<${e.list[0]}l${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
+			html+=`<${e.list[0]}l${e.id?" id=\""+e.id+"\"":""}${e.style?" style=\""+e.style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>`;
 
 			for(let i=0;i<e.items.length;i++){
 				if(e.items[i].type){
@@ -52,7 +52,7 @@ function htmEl(e){
 					html+=htmEl(e.items[i]);
 					html+="</li>";
 				}else{
-					html+=`<li${e.items[i].style?" style=\""+e.items[i].style+"\"":""}>${e.items[i].content}</li>`;
+					html+=`<li${e.id?" id=\""+e.id+"\"":""}${e.items[i].style?" style=\""+e.items[i].style+"\"":""}${e.class?" class=\""+e.class.join(" ")+"\"":""}>${e.items[i].content}</li>`;
 				}
 			}
 
@@ -69,13 +69,29 @@ function htmEl(e){
  */
 export function jplToHtml(jpl){
 	let jplObject = JSON.parse(jpl);
-	let html = "";
+	let html = `<!DOCTYPE html><html><head><title>${jplObject.title}</title>`;
+
+	if(jplObject.styles){
+		for(let i=0;i<jplObject.styles.length;i++){
+			html+=`<link rel="stylesheet" href="${jplObject.styles[i]}"/>`
+		}
+	}
+
+	html+="</head><body>"
 
 	for(let i=0;i<jplObject.elements.length;i++){
 		html+=htmEl(jplObject.elements[i]);
 	}
 
-	return `<!DOCTYPE html><html><head><title>${jplObject.title}</title>${jplObject.style?`<link rel="stylesheet" href="${jplObject.style}"/>`:``}</head><body>`+html+"</body></html>";
+	if(jplObject.scripts){
+		for(let i=0;i<jplObject.scripts.length;i++){
+			html+=`<script src="${jplObject.scripts[i]}"></script>`;
+		}
+	}
+
+	html+="</body></html>";
+
+	return html
 }
 
 /**

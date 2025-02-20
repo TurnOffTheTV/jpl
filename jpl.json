@@ -13,12 +13,18 @@
 			"description": "List of elements in the document.",
 			"type": "array",
 			"items": {
-				"$ref": "jpl-el.json"
+				"$ref": "https://turnoffthetv.xyz/jpl-el.json"
 			}
 		},
-		"style": {
-			"type": "string",
-			"description": "URI to a stylesheet to use in this document"
+		"scripts": {
+			"type": "array",
+			"items": {"type": "string"},
+			"description": "URIs of JavaScript files to use in this document"
+		},
+		"styles": {
+			"type": "array",
+			"items": {"type": "string"},
+			"description": "URIs of stylesheets to use in this document"
 		}
 	},
 	"required": ["title", "elements"]

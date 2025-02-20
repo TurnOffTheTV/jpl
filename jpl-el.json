@@ -5,11 +5,8 @@
 	"description": "An element for a JSON Page Layout document",
 	"type": "object",
 	"properties": {
-		"class": {
-			"type": ["string","array"],
-			"description": "Class name(s) for this element",
-			"items": {"type": "string"}
-		},
+		"class": {"type": ["string","array"], "description": "Class name(s) for this element", "items": {"type": "string"}},
+		"id": {"type": "string", "description": "ID for this element"},
 		"style": {"type": "string", "description": "CSS styling for this element"},
 		"type": {"description": "Type of element"}
 	},
@@ -20,13 +17,14 @@
 
 				"content": {
 					"type": ["string","array"],
-					"description": "Text for this paragraph"},
+					"description": "Text for this paragraph",
 					"items": {
 						"oneOf": [
 							{"type": "string"},
-							{"$ref": "jpl-el.json"}
+							{"$ref": "https://turnoffthetv.xyz/jpl-el.json"}
 						]
 					}
+				}
 			},
 			"required": ["content"]
 		},
@@ -34,7 +32,16 @@
 			"properties": {
 				"type": {"const": "link"},
 
-				"content": {"type": "string", "description": "Text for this link"},
+				"content": {
+					"type": ["string","array"],
+					"description": "Text for this link",
+					"items": {
+						"oneOf": [
+							{"type": "string"},
+							{"$ref": "https://turnoffthetv.xyz/jpl-el.json"}
+						]
+					}
+				},
 				"href": {"type": "string", "description": "URL this link points to"}
 			},
 			"required": ["href"]
@@ -43,7 +50,16 @@
 			"properties": {
 				"type": {"const": "header"},
 
-				"content": {"type": "string", "description": "Text for this header"},
+				"content": {
+					"type": ["string","array"],
+					"description": "Text for this header",
+					"items": {
+						"oneOf": [
+							{"type": "string"},
+							{"$ref": "https://turnoffthetv.xyz/jpl-el.json"}
+						]
+					}
+				},
 				"level": {
 					"type": "number",
 					"minimum": 1,
@@ -64,14 +80,16 @@
 						"oneOf": [
 							{
 								"properties": {
-									"content": {"type": "string", "description": "Text for this list item"},
+									"content": {"type": "string", "description": "Text for this list item", "items": {"type": "string"}},
 									"style": {"type": "string", "description": "CSS styling for this element"},
+									"class": {"type": ["array","string"], "description": "Class name(s) for this element"},
+									"id": {"type": "string", "description": "ID for this element"},
 									"type": {"type": "null"}
 								},
 								"required": ["content"]
 							},
 							{
-								"$ref": "jpl-el.json"
+								"$ref": "https://turnoffthetv.xyz/jpl-el.json"
 							}
 						]
 					},
