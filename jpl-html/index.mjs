@@ -64,11 +64,17 @@ function htmEl(e){
 
 /**
  * Convert JPL to HTML
- * @param {string} jpl - JPL JSON string
+ * @param {string|Object} jpl - JPL JSON string or object
  * @returns {string} - HTML output
  */
 export function jplToHtml(jpl){
-	let jplObject = JSON.parse(jpl);
+	let jplObject;
+	if(typeof jpl==="string"){
+		jplObject = JSON.parse(jpl);
+	}else{
+		jplObject=jpl;
+	}
+
 	let html = `<!DOCTYPE html><html><head><title>${jplObject.title}</title>`;
 
 	if(jplObject.styles){

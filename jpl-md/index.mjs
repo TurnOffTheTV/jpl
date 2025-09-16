@@ -63,11 +63,16 @@ function mdEl(e){
 
 /**
  * Convert JPL to Markdown
- * @param {string} jpl - JPL JSON string
+ * @param {string|Object} jpl - JPL JSON string or object
  * @returns {string} - Markdown output
  */
 export function jplToMd(jpl){
-	let jplObject = JSON.parse(jpl);
+	let jplObject;
+	if(typeof jpl==="string"){
+		jplObject = JSON.parse(jpl);
+	}else{
+		jplObject=jpl;
+	}
 	let md = "";
 
 	for(let i=0;i<jplObject.elements.length;i++){
